@@ -1,0 +1,4 @@
+$ctz->addField( 'option_id', 'info_text', array(
+	'label' => __('Test info text label'),
+	'description' => __('Test info text description'),
+));

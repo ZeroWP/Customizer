@@ -76,5 +76,9 @@ function myprefix_customizer_fields( $wp_customize ) {
 }
 ```
 
-
+###FYI:
+- All fields must have a section. This means that the fields must be created after a section has open.
+- Field IDs must be unique, else the previous field with the same ID will be removed and used the last one in the list.
+- If the field type is not recognized, it will be displayed as a text input.
+- Printing `zerowp_customizer_custom_controls()` function, will return all registered field types and their class names. Note: Some of the built-in fields are missing.
 

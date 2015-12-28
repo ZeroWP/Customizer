@@ -10,7 +10,7 @@ The license allows the usage in any projects(personal or commercial). An attribu
 
  * PHP 5.3+
  
-##How to use:
+##Short tutorial:
 ###1. Include the files
 ```php
 require_once dirname(__FILE__) . "/src/Customizer/mod.php";
@@ -56,7 +56,32 @@ $ctz->addField( 'myprefix_upload_field', 'upload', array(
 ));
 ```
 
+#####Step 4. Reveal your new fields.
 
+####Here is the full code that we wrote in the previous tutorial:
+```php
+add_action( 'customize_register', 'myprefix_customizer_fields' );
+function myprefix_customizer_fields( $wp_customize ) {
+	if( ! class_exists('ZeroWP\Customizer\Create') ) 
+		return; //if class not found, stop!
+		
+	//This is our new customizer object
+	$ctz = new ZeroWP\Customizer\Create( $wp_customize );
+
+	// Create a section
+	$ctz->addSection( 'myprefix_section_1', __('Section name', 'text-domain') );
+
+	// Add the field with ID 'myprefix_color_field' to a section with ID 'myprefix_section_1'
+	$ctz->addField( 'myprefix_color_field', 'color', array(
+		'label' => __('Color field test', 'text-domain'),
+	));
+	
+	// Add the field with ID 'myprefix_upload_field' to a section with ID 'myprefix_section_1'
+	$ctz->addField( 'myprefix_upload_field', 'upload', array(
+		'label' => __('Upload field test', 'text-domain'),
+	));
+}
+```
 
 
 

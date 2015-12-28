@@ -15,11 +15,11 @@ function zerowp_customizer_register_control_image_select( $wp_customize ){
 		}
 
 		public function enqueue() {
-			wp_register_style( 'qwc-image-select-styles', QWC_URI .'controls/image-select/styles.css');
-			wp_enqueue_style('qwc-image-select-styles');
+			wp_register_style( 'zerowp-customizer-image-select-styles', plugin_dir_url( __FILE__ ) .'assets/styles.css');
+			wp_enqueue_style('zerowp-customizer-image-select-styles');
 
-			wp_register_script( 'qwc-image-select-scripts', QWC_URI .'controls/image-select/scripts.js', 'jquery', false, true);
-			wp_enqueue_script('qwc-image-select-scripts');
+			wp_register_script( 'zerowp-customizer-image-select-scripts', plugin_dir_url( __FILE__ ) .'assets/scripts.js', 'jquery', false, true);
+			wp_enqueue_script('zerowp-customizer-image-select-scripts');
 
 			parent::enqueue();
 		}
@@ -35,15 +35,15 @@ function zerowp_customizer_register_control_image_select( $wp_customize ){
 					</label>
 						
 					<?php 
-						$styles = $this->args['images'];
+						$styles = $this->args['choices'];
 
-						echo '<div class="control-image-select-block"'. $this->getLinkWith() .'>';
+						echo '<div class="zerowp-customizer-image-select-control-block"'. $this->getLinkWith() .'>';
 							foreach ($styles as $style) {
 								if( is_array($style) ){
 									echo '<img'. $this->getValueAttributes( $style ) . $this->getStyleClass( $style ) . $this->getOptionAttributes( $style ) . $this->getParentOption( $style ) .' />';
 								}
 								else{
-									echo '<div class="image-select-section-label">'. esc_attr($style) .'</div>';
+									echo '<div class="zerowp-customizer-image-select-section-label">'. esc_attr($style) .'</div>';
 								}
 							}
 							$this->getValueInput();
@@ -77,11 +77,11 @@ function zerowp_customizer_register_control_image_select( $wp_customize ){
 
 		public function getStyleClass( $style ){
 			$active = ( $this->value() == $style['value'] ) ? ' active' : '';
-			return  ' class="image-select-control-element'. $active .'"';
+			return  ' class="zerowp-customizer-image-select-control-element'. $active .'"';
 		}
 
 		public function getValueInput(){
-			echo '<input class="image-select-control-value" type="hidden" value="'. $this->value() .'" '. $this->get_link() .' />';	
+			echo '<input class="zerowp-customizer-image-select-control-value" type="hidden" value="'. $this->value() .'" '. $this->get_link() .' />';	
 		}
 
 	}

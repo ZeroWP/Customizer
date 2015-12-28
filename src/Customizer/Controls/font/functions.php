@@ -1,6 +1,6 @@
 <?php
-if( ! function_exists('qwc_standard_fonts') ){
-	function qwc_standard_fonts(){
+if( ! function_exists('zerowp_customizer_standard_fonts') ){
+	function zerowp_customizer_standard_fonts(){
 		return array(
 			//sans-serif
 			'Arial',
@@ -44,14 +44,14 @@ if( ! function_exists('qwc_standard_fonts') ){
 	}
 }
 
-if( ! function_exists('qwc_enqueue_font') ){
-	function qwc_enqueue_font( $option ){
+if( ! function_exists('zerowp_customizer_enqueue_font') ){
+	function zerowp_customizer_enqueue_font( $option ){
 		$font_name          = get_theme_mod( $option );
 		if(empty($font_name)){
 			$font_name = 'Arial';
 		}
 
-		if( ! in_array($font_name, qwc_standard_fonts() ) ){
+		if( ! in_array($font_name, zerowp_customizer_standard_fonts() ) ){
 			$font_weight        = get_theme_mod( $option . '_weight', 400 );
 			$font_weight        = (! empty( $font_weight ) ? $font_weight : 400);
 			$font_weight_in_url = !in_array( absint($font_weight), array(400, 700) ) ? '400,700,'. $font_weight : '400,700';
@@ -75,8 +75,8 @@ if( ! function_exists('qwc_enqueue_font') ){
 	}
 }
 
-if( ! function_exists('qwc_get_font_css') ){
-	function qwc_get_font_css( $option ){
+if( ! function_exists('zerowp_customizer_get_font_css') ){
+	function zerowp_customizer_get_font_css( $option ){
 		$font_name   = get_theme_mod( $option );
 		$font_weight = get_theme_mod( $option . '_weight', 400 );
 		$font_weight = (! empty( $font_weight ) ? $font_weight : 400);
@@ -94,12 +94,12 @@ if( ! function_exists('qwc_get_font_css') ){
 	}
 }
 
-if( ! function_exists('qwc_apply_font_css') ){
-	function qwc_apply_font_css( $option, $selectors, $style_tag = false ){
+if( ! function_exists('zerowp_customizer_apply_font_css') ){
+	function zerowp_customizer_apply_font_css( $option, $selectors, $style_tag = false ){
 		$before = ( $style_tag ) ? '<style>' : '';
 		$after = ( $style_tag ) ? '</style>' : '';
 		return $before . $selectors .'{
-			'. qwc_get_font_css( $option ) .'
+			'. zerowp_customizer_get_font_css( $option ) .'
 		}' . $after;
 	}
 }

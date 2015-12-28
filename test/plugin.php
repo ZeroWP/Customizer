@@ -28,6 +28,28 @@ function zerowp_customizer_demo_fields( $wp_customize ) {
 
 	$ctz->addSection( 'smk_theme_test_builtin', __('Test built-in', 'smk_theme') );
 
+	$ctz->addField( 'image_select_test', 'image_select', array(
+		'label' => __('Image select test', 'smk_theme'),
+		'choices' => array(
+			array(
+				'img' => plugin_dir_url(__FILE__) . '1.png',
+				'value' => 'my_option_1',
+			),
+			array(
+				'img' => plugin_dir_url(__FILE__) . '2.png',
+				'value' => 'my_option_2',
+			),
+			array(
+				'img' => plugin_dir_url(__FILE__) . '3.png',
+				'value' => 'my_option_3',
+			),
+		),
+	));
+
+	$ctz->addField( 'ui_slider_test', 'ui_slider', array(
+		'label' => __('UI Slider test', 'smk_theme'),
+	));
+
 	$ctz->addField( 'color_test', 'color', array(
 		'label' => __('Color test', 'smk_theme'),
 	));

@@ -3,8 +3,8 @@
 	"use strict";
 
 	$(document).ready(function(){
-		 function qwc_ui_slider_init() {
-			jQuery('.qwc-ui-slider-block .qwc-ui-slider').each(function(index, elem) {
+		 function zerowp_customizer_ui_slider_init() {
+			jQuery('.zerowp-customizer-ui-slider-block .zerowp-customizer-ui-slider').each(function(index, elem) {
 				
 				var obj   = jQuery(this),
 				    val   = parseInt(obj.data('val'), 10),
@@ -31,11 +31,11 @@
 				$(elem).find('.ui-slider-handle').addClass('wp-ui-primary');
 				
 			});
-			$('.qwc-ui-slider-input').on('keyup change', function(){
-				$(this).next('.qwc-ui-slider').slider('value', $(this).val() );
+			$('.zerowp-customizer-ui-slider-input').on('keyup change', function(){
+				$(this).next('.zerowp-customizer-ui-slider').slider('value', $(this).val() );
 			});
 
-			// $('.qwc-ui-slider-input').on('change', function(){
+			// $('.zerowp-customizer-ui-slider-input').on('change', function(){
 			// 	var min_allowed = parseInt( $(this).attr('min'), 10);
 			// 	var max_allowed = parseInt( $(this).attr('max'), 10);
 			// 	var value = parseInt( $(this).val(), 10);
@@ -52,7 +52,7 @@
 			// });
 
 		};
-		qwc_ui_slider_init();
+		zerowp_customizer_ui_slider_init();
 	});
 
 

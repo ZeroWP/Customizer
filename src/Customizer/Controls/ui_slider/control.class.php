@@ -17,11 +17,11 @@ function zerowp_customizer_register_control_ui_slider( $wp_customize ){
 		}
 
 		public function enqueue() {
-			wp_register_style( 'qwc-ui-slider-styles', QWC_URI .'controls/ui-slider/styles.css');
-			wp_enqueue_style('qwc-ui-slider-styles');
+			wp_register_style( 'zerowp-customizer-ui-slider-styles', plugin_dir_url( __FILE__ ) .'assets/styles.css');
+			wp_enqueue_style('zerowp-customizer-ui-slider-styles');
 
-			wp_register_script( 'qwc-ui-slider-scripts', QWC_URI .'controls/ui-slider/scripts.js', array( 'jquery', 'jquery-ui-core' ), false, true);
-			wp_enqueue_script('qwc-ui-slider-scripts');
+			wp_register_script( 'zerowp-customizer-ui-slider-scripts', plugin_dir_url( __FILE__ ) .'assets/scripts.js', array( 'jquery', 'jquery-ui-core' ), false, true);
+			wp_enqueue_script('zerowp-customizer-ui-slider-scripts');
 
 			parent::enqueue();
 		}
@@ -48,9 +48,9 @@ function zerowp_customizer_register_control_ui_slider( $wp_customize ){
 						
 						//html output
 
-						$output .= '<div class="qwc-ui-slider-block">';
-							$output .= '<input type="text" '. $this->get_link() .' value="'. $val .'" min="'. $min .'" max="'. $max .'" step="'. $step .'" class="qwc-ui-slider-input" />';
-							$output .= '<div id="'.esc_attr($this->id).'-slider" class="qwc-ui-slider"'. $data .'></div>';
+						$output .= '<div class="zerowp-customizer-ui-slider-block">';
+							$output .= '<input type="text" '. $this->get_link() .' value="'. $val .'" min="'. $min .'" max="'. $max .'" step="'. $step .'" class="zerowp-customizer-ui-slider-input" />';
+							$output .= '<div id="'.esc_attr($this->id).'-slider" class="zerowp-customizer-ui-slider"'. $data .'></div>';
 						$output .= '</div>';		
 
 						echo $output;

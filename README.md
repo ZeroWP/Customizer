@@ -28,11 +28,8 @@ function myprefix_customizer_fields( $wp_customize ) {
 
 #####Step 2. Instantiate the 'Create' class:
 
-Inside of the previously defined function instantiate the `Create` class. It is recommended to check first if it exists.
+Inside of the previously defined function instantiate the `Create` class.
 ```php
-if( ! class_exists('ZeroWP\Customizer\Create') ) 
-	return; //if class not found, stop!
-	
 //This is our new customizer object
 $ctz = new ZeroWP\Customizer\Create( $wp_customize );
 ```
@@ -62,10 +59,6 @@ $ctz->addField( 'myprefix_upload_field', 'upload', array(
 ```php
 add_action( 'customize_register', 'myprefix_customizer_fields' );
 function myprefix_customizer_fields( $wp_customize ) {
-	if( ! class_exists('ZeroWP\Customizer\Create') ) 
-		return; //if class not found, stop!
-		
-	//This is our new customizer object
 	$ctz = new ZeroWP\Customizer\Create( $wp_customize );
 
 	// Create a section

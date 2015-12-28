@@ -12,6 +12,9 @@ The license allows the usage in any projects(personal or commercial). An attribu
  
 ##Short tutorial:
 ###1. Include the files
+
+Include this file just once. Ussually, for plugin base file and for themes in `functions.php`. 
+
 ```php
 require_once dirname(__FILE__) . "/src/Customizer/mod.php";
 ```

@@ -85,3 +85,25 @@ function myprefix_customizer_fields( $wp_customize ) {
 - If the field type is not recognized, it will be displayed as a text input.
 - Printing `zerowp_customizer_custom_controls()` function, will return all registered field types and their class names. Note: Some of the built-in fields are missing.
 
+
+##Methods:
+
+After instantiation of `$ctz = new ZeroWP\Customizer\Create( $wp_customize );` class you can use the following methods:
+
+#####Panels:
+* `$ctz->addPanel( $id, $title = '', $settings = array() );` - Create a new panel.
+* `$ctz->openPanel( $id );` - Switch to an existing panel by ID
+* `$ctz->closePanel();` - Close the currently open panel
+* `$ctz->removePanel( $id );` - Remove an existing panel by ID
+
+#####Sections:
+* `$ctz->addSection( $id, $title = false, $settings = array() );` - Create a new section.
+* `$ctz->openSection( $id );` - Switch to an existing section by ID
+* `$ctz->closeSection();` - Close the currently open section
+* `$ctz->removeSection( $id );` - Remove an existing section by ID
+
+#####Fields:
+* `$ctz->addField( $id, $type = 'text', $settings = array() );` - Create a new field.
+* `$ctz->removeField( $id );` - Remove an existing field by ID
+
+   

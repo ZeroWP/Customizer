@@ -90,23 +90,13 @@ function myprefix_customizer_fields( $wp_customize ) {
 
 After instantiation of `$ctz = new ZeroWP\Customizer\Create( $wp_customize );` class you can use the following methods:
 
-#####Panels:
+###Panels:
 * `$ctz->addPanel( $id, $title = '', $settings = array() );` - Create a new panel.
 * `$ctz->openPanel( $id );` - Switch to an existing panel by ID
 * `$ctz->closePanel();` - Close the currently open panel
 * `$ctz->removePanel( $id );` - Remove an existing panel by ID
 
-#####Sections:
-* `$ctz->addSection( $id, $title = false, $settings = array() );` - Create a new section.
-* `$ctz->openSection( $id );` - Switch to an existing section by ID
-* `$ctz->closeSection();` - Close the currently open section
-* `$ctz->removeSection( $id );` - Remove an existing section by ID
-
-#####Fields:
-* `$ctz->addField( $id, $type = 'text', $settings = array() );` - Create a new field.
-* `$ctz->removeField( $id );` - Remove an existing field by ID
- 
-####->addPanel( $id, $title = '', $settings = array() )
+#####addPanel( $id, $title = '', $settings = array() )
 
 Create a new panel and/or switch to an existing one.<br>
 To create a new panel you must specify a unique ID(`$id`), the title(`$title`) and optionally the settings(`$settings`). If the `$title` variable is empty, the settings will be ignored and the panel will not be created, but instead will switch to an existing panel that has the passed `$id`. In a few words, passing only the `$id` is the equivalent of `openPanel()` method(see below fo info).
@@ -122,7 +112,7 @@ $ctz->addPanel( 'my_panel_id', __('My Panel title', 'text-domain'), array(
 ) );
 ```
 
-####->openPanel( $id ) & closePanel()
+#####openPanel( $id ) & closePanel()
 
 Switch to an existing panel with `openPanel()` and close it with `closePanel()`.<br>
 Once a panel has been registered you can later access it and add sections. `openPanel()` method allows to open it and append new sections.<br>
@@ -138,6 +128,17 @@ $ctz->openPanel( 'my_panel_id'  ); //Open the panel with ID 'my_panel_id`
 $ctz->closePanel(); //Close the panel with ID 'my_panel_id`. Does not require to pass the ID.
 ```
 
+
+###Sections:
+* `$ctz->addSection( $id, $title = false, $settings = array() );` - Create a new section.
+* `$ctz->openSection( $id );` - Switch to an existing section by ID
+* `$ctz->closeSection();` - Close the currently open section
+* `$ctz->removeSection( $id );` - Remove an existing section by ID
+
+###Fields:
+* `$ctz->addField( $id, $type = 'text', $settings = array() );` - Create a new field.
+* `$ctz->removeField( $id );` - Remove an existing field by ID
+ 
 
 
 

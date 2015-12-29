@@ -106,21 +106,39 @@ After instantiation of `$ctz = new ZeroWP\Customizer\Create( $wp_customize );` c
 * `$ctz->addField( $id, $type = 'text', $settings = array() );` - Create a new field.
 * `$ctz->removeField( $id );` - Remove an existing field by ID
  
-####addPanel( $id, $title = '', $settings = array() )
+####->addPanel( $id, $title = '', $settings = array() )
 
-Create a new panel and/or switch to an existing one.
+Create a new panel and/or switch to an existing one.<br>
 To create a new panel you must specify a unique ID(`$id`), the title(`$title`) and optionally the settings(`$settings`). If the `$title` variable is empty, the settings will be ignored and the panel will not be created, but instead will switch to an existing panel that has the passed `$id`. In a few words, passing only the `$id` is the equivalent of `openPanel()` method(see below fo info).
 **Note:** `$settings` are optional. Use only that you need. 
 
 **Example:**
 ```php
-$ctz->addPanel( 'my_unique_panel_id', __('My Panel title', 'text-domain'), array(
+$ctz->addPanel( 'my_panel_id', __('My Panel title', 'text-domain'), array(
 	'capability'      => 'edit_theme_options',
 	'description'     => __( 'Panel description', 'text-domain' ),
 	'theme_supports'  => '',
 	'priority'        => 10,
 ) );
 ```
+
+####->openPanel( $id ) & closePanel()
+
+Switch to an existing panel with `openPanel()` and close it with `closePanel()`.<br>
+Once a panel has been registered you can later access it and add sections. `openPanel()` method allows to open it and append new sections.<br>
+`closePanel()` allows to close the currently open panel.<br>
+If you want to switch to another panel you are not required to close it. It will be closed automatically and switch to the next panel.<br>
+
+**Example:**
+```php
+$ctz->openPanel( 'my_panel_id'  ); //Open the panel with ID 'my_panel_id`
+
+	// Add new sections to this panel
+	
+$ctz->closePanel(); //Close the panel with ID 'my_panel_id`. Does not require to pass the ID.
+```
+
+
 
 
    

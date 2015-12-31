@@ -1,14 +1,9 @@
 <?php
 /* 
- * Mod Name:    ZeroWP Customizer
- * Mod URI:     http://zerowp.com/
+ * Mod Name:    Customizer
  * Description: Create customizer controls quick and easy with as minimum code as possible.
  * Author:      ZeroWP Team
- * Version:     1.0
  * Author URI:  http://zerowp.com/
- * Licence:     GPLv2
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
- * Copyright:   (c) 2015 ZeroWP. All rights reserved
  */
 
 //Do not allow direct access to this file.

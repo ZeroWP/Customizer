@@ -32,15 +32,15 @@ function zerowp_customizer_demo_fields( $wp_customize ) {
 		'label' => __('Image select test', 'smk_theme'),
 		'choices' => array(
 			array(
-				'img' => plugin_dir_url(__FILE__) . '1.png',
+				'img' => plugin_dir_url(__FILE__) . 'test/1.png',
 				'value' => 'my_option_1',
 			),
 			array(
-				'img' => plugin_dir_url(__FILE__) . '2.png',
+				'img' => plugin_dir_url(__FILE__) . 'test/2.png',
 				'value' => 'my_option_2',
 			),
 			array(
-				'img' => plugin_dir_url(__FILE__) . '3.png',
+				'img' => plugin_dir_url(__FILE__) . 'test/3.png',
 				'value' => 'my_option_3',
 			),
 		),

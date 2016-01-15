@@ -16,7 +16,7 @@ The license allows the usage in any projects(personal or commercial). An attribu
 Include this file just once. Ussually, for plugin base file and for themes in `functions.php`. 
 
 ```php
-require_once dirname(__FILE__) . "/src/Customizer/mod.php";
+require_once dirname(__FILE__) . "/ZeroWP/Customizer/mod.php";
 ```
 
 ###2.Create fields:

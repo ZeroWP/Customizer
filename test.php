@@ -12,7 +12,7 @@
 Include Customizer Mod
 -------------------------------------------------------------------------------
 */
-require_once plugin_dir_path( __FILE__ ) . "src/Customizer/mod.php";
+require_once plugin_dir_path( __FILE__ ) . "ZeroWP/Customizer/mod.php";
 
 
 /*

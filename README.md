@@ -1,3 +1,6 @@
+
+#The following docs are up to date!!!
+
 # Customizer
 Create customizer controls quick and easy with as minimum code as possible.
 
@@ -9,8 +12,6 @@ The license allows the usage in any projects(personal or commercial). An attribu
 ##Requirements:
 
  * PHP 5.3+
- 
-##The following docs are up to date!
  
 ##Short tutorial:
 ###1. Include the files

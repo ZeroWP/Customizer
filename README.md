@@ -1,5 +1,5 @@
 
-#The following docs are up to date!!!
+#The following docs are outdated!!!
 
 # Customizer
 Create customizer controls quick and easy with as minimum code as possible.

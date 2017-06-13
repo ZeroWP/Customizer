@@ -10,7 +10,7 @@
  * Text Domain: zerowp-customizer
  * Domain Path: /languages
  *
- * Version:     1.0
+ * Version:     0.2-beta
  * 
  */
 
@@ -24,19 +24,11 @@ function zwpc_config( $key = false ){
 	$settings = apply_filters( 'zwpc:config_args', array(
 		
 		// Plugin data
-		'version'          => '1.0',
+		'version'          => '0.2-beta',
 		'min_php_version'  => '5.3',
 		
 		// The list of required plugins. 'slug' => array 'name and uri'
-		'required_plugins' => array(
-			// 'test' => array(
-			// 	'plugin_name' => 'Test',
-			// 	'plugin_uri' => 'http://example.com/'
-			// ),
-			// 'another-test' => array(
-			// 	'plugin_name' => 'Another Test',
-			// ),
-		),
+		'required_plugins' => array(),
 
 		// The priority in plugins loaded. Only if has required plugins
 		'priority'         => 10,

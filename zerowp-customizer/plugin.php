@@ -9,6 +9,13 @@ final class ZWPC_Plugin{
 	public $version;
 
 	/**
+	 * Manager. User to manage fields, sections, panels and control types.
+	 *
+	 * @var string
+	 */
+	public $manager;
+
+	/**
 	 * This is the only instance of this class.
 	 *
 	 * @var string
@@ -77,6 +84,8 @@ final class ZWPC_Plugin{
 		--------------------*/
 		include_once $this->rootPath() . "autoloader.php";
 		include_once $this->rootPath() . "functions.php";
+
+		$this->manager = new ZeroWPCustomizer\Manager\Manage;
 		
 		/* Activation and deactivation hooks
 		-----------------------------------------*/
@@ -117,12 +126,10 @@ final class ZWPC_Plugin{
 		$this->loadTextDomain();
 
 		// Create customizer elements
-		do_action( 'zwpc:create', new ZeroWPCustomizer\Manager\Manage );
+		do_action( 'zwpc:create', $this->manager );
 
-		new ZeroWPCustomizer\Control\Create;
 		new ZeroWPCustomizer\Build;
 
-		
 		// Call plugin classes/functions here.
 		do_action( 'zwpc:init' );
 
@@ -209,30 +216,75 @@ final class ZWPC_Plugin{
 		$id = $this->config( 'id' );
 
 		$this->addStyles(array(
+			
+			'zwpc-range-slider' => array(
+				'src'     => $this->assetsURL( 'js-plugins/range-slider/rangeslider.css' ),
+				'ver'     => '2.1.1',
+				'enqueue' => false,
+				'enqueue_callback' => array( $this, 'isCustomizerScreen' ),
+			),
+			
+			'zwpc-spectrum' => array(
+				'src'     => $this->assetsURL( 'js-plugins/spectrum/spectrum.css' ),
+				'ver'     => '1.8.0',
+				'enqueue' => false,
+				'enqueue_callback' => array( $this, 'isCustomizerScreen' ),
+			),
+			
+			'zwpc-font-field' => array(
+				'src'     => $this->assetsURL( 'js-plugins/font/font.css' ),
+				'enqueue' => false,
+				'enqueue_callback' => array( $this, 'isCustomizerScreen' ),
+			),
+			
 			$id . '-styles-admin' => array(
 				'src'     => $this->assetsURL( 'css/styles-admin.css' ),
 				'enqueue' => false,
 			),
-			'zwpc-font-field' => array(
-				'src'     => $this->assetsURL( 'css/font-styles.css' ),
-				'enqueue' => false,
-			),
+	
 		));
 
 		$this->addScripts(array(
+	
+			'zwpc-range-slider' => array(
+				'src'     => $this->assetsURL( 'js-plugins/range-slider/rangeslider.min.js' ),
+				'ver'     => '2.1.1',
+				'deps'    => array( 'jquery' ),
+				'enqueue' => false,
+				'enqueue_callback' => array( $this, 'isCustomizerScreen' ),
+			),
+	
+			'zwpc-spectrum' => array(
+				'src'     => $this->assetsURL( 'js-plugins/spectrum/spectrum.js' ),
+				'ver'     => '1.8.0',
+				'deps'    => array( 'jquery' ),
+				'enqueue' => false,
+				'enqueue_callback' => array( $this, 'isCustomizerScreen' ),
+			),
+	
+			'zwpc-font-field' => array(
+				'src'     => $this->assetsURL( 'js-plugins/font/font.js' ),
+				'deps'    => array( 'jquery' ),
+				'enqueue' => false,
+				'enqueue_callback' => array( $this, 'isCustomizerScreen' ),
+			),
+	
 			$id . '-config-admin' => array(
 				'src'     => $this->assetsURL( 'js/config-admin.js' ),
 				'deps'    => array( 'jquery' ),
 				'enqueue' => true,
-				'enqueue_callback' => function(){
-					$screen = get_current_screen();
-					return is_admin() && 'customize' == $screen->base;
-				},
+				'enqueue_callback' => array( $this, 'isCustomizerScreen' ),
 			),
+	
 		));
 
 	}
 
+	public function isCustomizerScreen(){
+		$screen = get_current_screen();
+		return is_admin() && 'customize' == $screen->base;
+	}
+	
 	/*
 	-------------------------------------------------------------------------------
 	Styles

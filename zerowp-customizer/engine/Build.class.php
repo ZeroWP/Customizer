@@ -2,7 +2,6 @@
 namespace ZeroWPCustomizer;
 
 use ZeroWPCustomizer\Manager\Manage;
-use ZeroWPCustomizer\Control\Create as Creator;
 
 class Build{
 
@@ -82,7 +81,7 @@ class Build{
 				$wp_customize->add_setting( $field_id, $setting_args );
 
 
-				$all_custom_controls = Creator::controls();
+				$all_custom_controls = $manager->getControlTypes();
 				
 				try {
 					// If this field has been registered for this plugin.

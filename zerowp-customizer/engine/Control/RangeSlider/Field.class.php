@@ -13,8 +13,8 @@ class Field extends \WP_Customize_Control {
 	}
 
 	public function enqueue() {
-		wp_enqueue_style('range-slider');
-		wp_enqueue_script('range-slider');
+		wp_enqueue_style('zwpc-range-slider');
+		wp_enqueue_script('zwpc-range-slider');
 
 		parent::enqueue();
 	}

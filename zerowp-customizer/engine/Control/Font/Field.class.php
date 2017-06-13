@@ -14,6 +14,7 @@ class Field extends \WP_Customize_Control {
 
 	public function enqueue() {
 		wp_enqueue_style('zwpc-font-field');
+		wp_enqueue_script('zwpc-font-field');
 
 		parent::enqueue();
 	}

@@ -16,7 +16,7 @@ class Manage{
 	 *
 	 * @return string 
 	 */
-	protected $_defaulSection = 'title_tagline';
+	protected $_defaultSection = 'title_tagline';
 
 	/**
 	 * Keep the current section ID. Modified in time
@@ -24,6 +24,13 @@ class Manage{
 	 * @return string 
 	 */
 	protected $_currentSection = 'title_tagline';
+
+	/**
+	 * Keep the default panel ID
+	 *
+	 * @return string 
+	 */
+	protected $_defaultPanel = null;
 
 	/**
 	 * Keep the current panel ID
@@ -53,6 +60,13 @@ class Manage{
 	 */
 	protected $_filterFields = 'zwpc:fields';
 
+	/**
+	 * The filter name used to keep the control types
+	 *
+	 * @return string 
+	 */
+	protected $_controlTypes = 'zwpc:controls';
+
 	//------------------------------------//--------------------------------------//
 
 	/**
@@ -61,7 +75,20 @@ class Manage{
 	 * @return void
 	 */
 	public function __construct(){
-		$this->_defaulSection = apply_filters( 'zwpc:default_section_name', $this->_defaulSection );
+		$this->_defaultSection = apply_filters( 'zwpc:default_section_name', $this->_defaultSection );
+	}
+
+	/*
+	-------------------------------------------------------------------------------
+	Open customizer. This must be the first method to call in each action hook, to
+	avoid unexpected results.
+	-------------------------------------------------------------------------------
+	*/
+	public function openCustomizer(){
+		$this->_currentSection = $this->_defaultSection;
+		$this->_currentPanel = $this->_defaultPanel;
+
+		return $this;
 	}
 
 	/*
@@ -77,6 +104,9 @@ class Manage{
 			'section' => $this->_currentSection,
 			'settings' => $settings,
 		);
+
+		// Set field priority
+		$args['settings']['priority'] = $priority;
 
 		new Inject( $this->_filterFields, $id, $args, $priority );
 
@@ -97,6 +127,7 @@ class Manage{
 	public function addSection( $id, $title = false, $settings = array(), $priority = 30 ){
 		$settings = wp_parse_args( $settings, array(
 			'title' => $title,
+			'priority' => $priority,
 		));
 		
 		$settings['panel'] = $this->_currentPanel;
@@ -110,7 +141,7 @@ class Manage{
 
 	public function removeSection( $id, $priority = 30 ){
 		new Eject( $this->_filterSections, $id, $priority );
-		$this->_currentSection = $this->_defaulSection;
+		$this->_currentSection = $this->_defaultSection;
 
 		return $this;
 	}
@@ -122,7 +153,7 @@ class Manage{
 	}
 
 	public function closeSection( $id ){
-		$this->_currentSection = $this->_defaulSection;
+		$this->_currentSection = $this->_defaultSection;
 
 		return $this;
 	}
@@ -135,6 +166,7 @@ class Manage{
 	public function addPanel( $id, $title = false, $settings = array(), $priority = 30 ){
 		$settings = wp_parse_args( $settings, array(
 			'title' => $title,
+			'priority' => $priority,
 		));
 		
 		new Inject( $this->_filterPanels, $id, $settings, $priority );
@@ -165,6 +197,23 @@ class Manage{
 
 	/*
 	-------------------------------------------------------------------------------
+	Fields
+	-------------------------------------------------------------------------------
+	*/
+	public function addControlType( $type, $classname, $priority = 30 ){
+		new Inject( $this->_controlTypes, $this->camelToSnake( $type ), $classname, $priority );
+
+		return $this;
+	}
+
+	public function removeControlType( $type, $priority = 30 ){
+		new Eject( $this->_controlTypes, $this->camelToSnake( $type ), $priority );
+
+		return $this;
+	}
+
+	/*
+	-------------------------------------------------------------------------------
 	Helpers
 	-------------------------------------------------------------------------------
 	*/
@@ -178,6 +227,27 @@ class Manage{
 
 	public function getPanels(){
 		return apply_filters( $this->_filterPanels, array() );
+	}
+
+	public function getControlTypes(){
+		return apply_filters( $this->_controlTypes, array() );
+	}
+
+	/*
+	-------------------------------------------------------------------------------
+	Utils
+	-------------------------------------------------------------------------------
+	*/
+	/**
+	 * ID
+	 *
+	 * Prepare ID. Convert strings from camelCase to snake_case
+	 *
+	 * @param string $id String to be converted
+	 * @return string Converted string
+	 */
+	public function camelToSnake( $id ){
+		return strtolower(preg_replace( array('/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/' ), '$1_$2', $id ));
 	}
 
 }

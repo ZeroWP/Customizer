@@ -90,7 +90,7 @@ class Build{
 						$class_name = $all_custom_controls[ $field_type ];
 
 						if( ! class_exists($class_name) )
-							throw new DoException( "The `{$class_name}` registered for `{$field_type}` does not exists!" );
+							throw new \Exception( "The `{$class_name}` registered for `{$field_type}` does not exists!" );
 							
 						$class_instance = new $class_name( $wp_customize, $field_id, $control_args );
 						
@@ -106,7 +106,7 @@ class Build{
 					else{
 						$wp_customize->add_control( $field_id, $control_args );
 					}
-				} catch (DoException $e) {
+				} catch (\Exception $e) {
 					error_log( __CLASS__ .' error: '. $e->getMessage() );
 				}
 

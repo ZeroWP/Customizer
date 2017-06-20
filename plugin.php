@@ -262,6 +262,13 @@ final class ZWPC_Plugin{
 				'enqueue_callback' => array( $this, 'isCustomizerScreen' ),
 			),
 	
+			'zwpc-randomcolor' => array(
+				'src'     => $this->assetsURL( 'js-plugins/randomcolor/randomColor.js' ),
+				'deps'    => array( 'jquery' ),
+				'enqueue' => false,
+				'enqueue_callback' => array( $this, 'isCustomizerScreen' ),
+			),
+			
 			'zwpc-font-field' => array(
 				'src'     => $this->assetsURL( 'js-plugins/font/font.js' ),
 				'deps'    => array( 'jquery' ),

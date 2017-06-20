@@ -108,6 +108,7 @@ License: MIT
 
 .sp-clear.sp-clear-display {
 	background-position: center;
+	cursor: pointer;
 }
 
 .sp-clear-enabled .sp-clear {
@@ -254,9 +255,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 */
 
 .sp-container {
-	border-radius: 0;
-	background-color: #ECECEC;
-	border: solid 1px #f0c49B;
+	border-radius: 3px;
+	background-color: #fdfdfd;
+	border: solid 1px #afc2da;
 	padding: 0;
 }
 .sp-container, .sp-container button, .sp-container input, .sp-color, .sp-hue, .sp-clear {
@@ -300,7 +301,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 	background: #fdd;
 }
 .sp-picker-container , .sp-palette-container {
-	float:left;
+	float: right;
 	position: relative;
 	padding: 10px;
 	padding-bottom: 300px;
@@ -308,12 +309,12 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 .sp-picker-container {
 	width: 172px;
-	border-left: solid 1px #fff;
+	border-right: solid 1px #fff;
 }
 
 /* Palettes */
 .sp-palette-container {
-	border-right: solid 1px #ccc;
+	border-left: solid 1px #ccc;
 }
 
 .sp-palette-only .sp-palette-container {
@@ -323,7 +324,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .sp-palette .sp-thumb-el {
 	display: block;
 	position:relative;
-	float:left;
+	float: left;
 	width: 24px;
 	height: 15px;
 	margin: 3px;
@@ -408,14 +409,13 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 
 .sp-palette {
-	*width: 220px;
-	max-width: 220px;
+	max-width: 290px;
 }
 .sp-palette .sp-thumb-el {
-	width:16px;
-	height: 16px;
-	margin:2px 1px;
-	border: solid 1px #d0d0d0;
+	width: 20px;
+	height: 20px;
+	margin: 2px;
+	border: 0;
 }
 
 .sp-container {
@@ -485,7 +485,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 
 .sp-preview, .sp-alpha, .sp-thumb-el {
 	position:relative;
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+	background-color: #fff;
+	// background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+	border-radius: 3px;
 }
 .sp-preview-inner, .sp-alpha-inner, .sp-thumb-inner {
 	display:block;
@@ -493,9 +495,28 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 	top:0;left:0;bottom:0;right:0;
 }
 
+.sp-palette .sp-thumb-el {
+	width: 24px;
+	height: 24px;
+	margin: 1px;
+}
+.sp-palette .sp-thumb-inner {
+	top:2px;left:2px;bottom:2px;right:2px;
+}
+
 .sp-palette .sp-thumb-inner {
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
+	transition: all 0.1s;
+	border-radius: inherit;
+	z-index: 10;
+}
+
+.sp-palette .sp-thumb-inner:hover {
+	 -ms-transform: matrix(1.4, 0, 0, 1.4, 0, 0);
+	-webkit-transform: matrix(1.4, 0, 0, 1.4, 0, 0);
+	transform: matrix(1.4, 0, 0, 1.4, 0, 0);
+	z-index: 100;
 }
 
 .sp-palette .sp-thumb-light.sp-thumb-active .sp-thumb-inner {

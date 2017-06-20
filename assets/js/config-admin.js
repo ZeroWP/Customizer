@@ -56,7 +56,7 @@
 
 
 
-$(document).ready(function(){
+$(document).on( 'load ready', function(){
 	
 	/*
 	-------------------------------------------------------------------------------
@@ -74,18 +74,26 @@ $(document).ready(function(){
 	*/
 	if( jQuery().spectrum ){
 
-		$(".zerowpc-spectrum-input").each(function(){
-			$(this).spectrum({
-				preferredFormat: "rgb",
-				showAlpha: true,
-				showInput: true,
-				showInitial: true,
-				allowEmpty:true,
-				showButtons: false,
-				move: function(color) {
-					$(this).val( color ).change();
+		if( $.type( randomColor ) === "function" ){
+			$(".zerowpc-spectrum-input").each( function(){
+				var _this = $(this),
+				_rand = _this.data( 'random-color-palette' );
+
+				if( _rand ){
+					var _palette = [];
+					$.each(_rand, function(index, val) {
+						_palette[ index ] = randomColor( val );
+					});
+					_this.data( 'palette', _palette );
+					_this.data( 'show-palette', 'true' );
 				}
 			});
+		}
+
+		$(".zerowpc-spectrum-input").spectrum();
+
+		$(".zerowpc-spectrum-input").on("dragstop.spectrum", function(e, color) {
+			$(this).val( color ).change();
 		});
 
 		$(".zerowpc-spectrum-title").click(function() {

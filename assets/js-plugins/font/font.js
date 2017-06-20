@@ -34,6 +34,14 @@
 				Font
 				-------------------------------------------------------------------------------
 				*/
+				prepareFontsList: function(){
+					var _width = $('#customize-controls').outerWidth();
+					console.log( _width );
+					$('.zerowpc-fonts').css({
+						'left': _width
+					});
+				},
+
 				addSelectedFont: function( selected_elem_from_list, parent_block ){
 					var font_class = selected_elem_from_list.attr('class');
 					var font_title = selected_elem_from_list.attr('title');
@@ -68,14 +76,14 @@
 						$('.zerowpc-fonts').hide();
 
 						_this.toggleClass('active');
-						_this.parents('.zerowpc-fonts-block').find('.zerowpc-fonts').toggle();
+						$('.zerowpc-fonts').toggle();
 
 						//scroll to selected
-						var the_parent = _this.parents('.zerowpc-fonts-block').find('.zerowpc-fonts ul');
-						var target     = _this.find('.zerowpc-font-item').attr('title');
-						var element    = _this.parents('.zerowpc-fonts-block').find('.zerowpc-fonts ul li[title="' + target + '"]');
+						var the_parent = $('.zerowpc-fonts ul');
+						var target     = the_parent.find('.zerowpc-font-item').attr('title');
+						var element    = $('.zerowpc-fonts ul li[title="' + target + '"]');
 
-						the_parent.scrollTop( the_parent.scrollTop()+element.position().top-20 );
+						the_parent.scrollTop( the_parent.scrollTop()+element.position().top-60 );
 					});
 
 					//Cache the container
@@ -88,7 +96,7 @@
 						&& $('.zerowpc-fonts').has(event.target).length === 0 // ... nor a descendant of the fonts list
 						&& container.has(event.target).length === 0){// ... nor a descendant of the container
 							container.removeClass('active');
-							container.parents('.zerowpc-fonts-block').find('.zerowpc-fonts').hide();
+							$('.zerowpc-fonts').hide();
 						}
 					});
 
@@ -182,6 +190,7 @@
 				__construct: function(){
 					self = this;
 
+					self.prepareFontsList();
 					self.showFontsList();
 					self.buildFonts();
 					self.searchFonts();

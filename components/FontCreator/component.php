@@ -1,103 +1,53 @@
-<?php
-namespace ZeroWPCustomizer\Control\Font;
+<?php 
+final class ZeroWPCFontCreator{
 
-class Field extends \WP_Customize_Control {
-	public $type = 'font';
-	public $args = array();
-	public $field_id;
-
-	public function __construct( $manager, $id, $args = array() ) {
-		$this->args = $args;
-		$this->field_id = $id;
-		parent::__construct( $manager, $id, $args);
+	/**
+	 * This is the only instance of this class.
+	 *
+	 * @var string
+	 */
+	protected static $_instance = null;
+	
+	//------------------------------------//--------------------------------------//
+	
+	/**
+	 * Plugin instance
+	 *
+	 * Makes sure that just one instance is allowed.
+	 *
+	 * @return object 
+	 */
+	public static function instance() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
 	}
 
-	public function enqueue() {
-		wp_enqueue_style('zwpc-font-field');
-		wp_enqueue_script('zwpc-font-field');
-
-		parent::enqueue();
+	public function __clone() {
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'zerowp-customizer' ), '1.0' );
 	}
 
-	public function render_content() {
-		?>
-			<label>
-				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-				<?php if ( ! empty( $this->description ) ) : ?>
-					<span class="description customize-control-description"><?php echo $this->description ; ?></span>
-				<?php endif; ?>
-			</label>
-				
-		<?php 
-		echo '<div class="zerowpc-fonts-block">';
-			echo '<div class="zerowpc-show-selected-font"><div class="zerowpc-font-item"></div></div>
-			<div class="zerowpc-fonts">
-				<input type="text" class="zerowpc-fonts-search-field" placeholder="'. __('Search font', 'zerowpc_local') .'" />
-				<input type="hidden" class="zerowpc-fonts-value" '. $this->get_link() .' '. $this->value() .' />'
-				. $this->fontsList() .
-			'</div>
-		</div>';
+	public function __wakeup() {
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'zerowp-customizer' ), '1.0' );
 	}
 
-	// public function child_fields( $ctz ){
-	// 	$setting_args = $this->args;
-	// 	$setting_args['type'] = $this->args['transport_type'];
+	public function __construct() {
+		add_action( 'customize_controls_print_footer_scripts', array( $this, 'addFontsListToFooter' ) );
+	}
 
-	// 	// Font weight
-	// 	$setting_args['default'] = !empty($this->args['font_weight']) ? $this->args['font_weight'] : '400';
-	// 	$ctz->add_setting( $this->field_id .'_weight', $setting_args );
+	public function addFontsListToFooter(){
+		echo '<div class="zerowpc-fonts" style="display: none;">
+			<input type="text" class="zerowpc-fonts-search-field" placeholder="'. __('Search font', 'zerowp-customizer') .'" />'
+			. $this->fontsList() .
+		'</div>';
+	}
 
-	// 	$weight_args = $this->args;
-	// 	$weight_args['label'] = _x('Weight', 'The font weight', 'zerowpc_local');
-	// 	$weight_args['type'] = 'select';
-	// 	$weight_args['choices'] = array(
-	// 		'100' => '100',
-	// 		'200' => '200',
-	// 		'300' => '300',
-	// 		'400' => _x('Normal - 400', 'Font weight', 'zerowpc_local'),
-	// 		'500' => '500',
-	// 		'600' => '600',
-	// 		'700' => _x('Bold - 700', 'Font weight', 'zerowpc_local'),
-	// 		'800' => '800',
-	// 		'900' => '900',
-	// 	);
-	// 	$ctz->add_control( $this->field_id .'_weight', $weight_args );
-
-	// 	// Font style
-	// 	$setting_args['default'] = !empty($this->args['font_style']) && in_array( $this->args['font_style'], array('normal', 'italic') ) ? $this->args['font_style'] : 'normal';
-	// 	$ctz->add_setting( $this->field_id .'_style', $setting_args );
-
-	// 	$style_args = $this->args;
-	// 	$style_args['label'] = _x('Style', 'The font style',  'zerowpc_local');
-	// 	$style_args['type'] = 'radio';
-	// 	$style_args['choices'] = array(
-	// 		'normal' => _x('normal', 'font style normal', 'zerowpc_local'),
-	// 		'italic' => _x('italic', 'font style italic', 'zerowpc_local'),
-	// 	);
-	// 	$ctz->add_control( $this->field_id .'_style', $style_args );
-
-	// 	// Font family
-	// 	$setting_args['default'] = !empty($this->args['font_family']) ? $this->args['font_family'] : 'sans-serif';
-	// 	$ctz->add_setting( $this->field_id .'_family', $setting_args );
-
-	// 	$family_args = $this->args;
-	// 	$family_args['label'] = _x('Family', 'The font family', 'zerowpc_local');
-	// 	$family_args['type'] = 'select';
-	// 	$family_args['choices'] = array(
-	// 		'sans-serif' => _x('sans-serif', 'Font family', 'zerowpc_local'),
-	// 		'serif' => _x('serif', 'Font family', 'zerowpc_local'),
-	// 		'monospace' => _x('monospace', 'Font family', 'zerowpc_local'),
-	// 		'fantasy' => _x('fantasy', 'Font family', 'zerowpc_local'),
-	// 		'cursive' => _x('cursive', 'Font family', 'zerowpc_local'),
-	// 	);
-	// 	$ctz->add_control( $this->field_id .'_family', $family_args );
-
-	// }
 
 	public function fontsList(){
 		return '
 <ul>
-<li class="zerowpc-font-heading-title wp-ui-primary zerowpc-main-headings">'. __('Standard fonts', 'zerowpc_local') .'</li>
+<li class="zerowpc-font-heading-title wp-ui-primary zerowpc-main-headings">'. __('Standard fonts', 'zerowp-customizer') .'</li>
 <li title="Arial" data-c="sans-serif" data-w="400,700" class="zerowpc-font-item font-standard">Arial</li>
 <li title="Arial Black" data-c="sans-serif" data-w="400,700" class="zerowpc-font-item font-standard">Arial Black</li>
 <li title="Arial Narrow" data-c="sans-serif" data-w="400,700" class="zerowpc-font-item font-standard">Arial Narrow</li>
@@ -132,7 +82,7 @@ class Field extends \WP_Customize_Control {
 <li title="Papyrus" data-c="fantasy" data-w="400,700" class="zerowpc-font-item font-standard">Papyrus</li>
 <li title="Brush Script MT" data-c="cursive" data-w="400,700" class="zerowpc-font-item font-standard">Brush Script MT</li>
 
-<li class="zerowpc-font-heading-title wp-ui-primary zerowpc-main-headings">'. __('Google fonts', 'zerowpc_local') .'</li>
+<li class="zerowpc-font-heading-title wp-ui-primary zerowpc-main-headings">'. __('Google fonts', 'zerowp-customizer') .'</li>
 <li title="ABeeZee" data-c="sans-serif" data-w="400" class="zerowpc-font-item font-id-0"></li>
 <li title="Abel" data-c="sans-serif" data-w="400" class="zerowpc-font-item font-id-1"></li>
 <li title="Abril Fatface" data-c="fantasy" data-w="400" class="zerowpc-font-item font-id-2"></li>
@@ -871,4 +821,7 @@ class Field extends \WP_Customize_Control {
 <li title="Zeyada" data-c="cursive" data-w="400" class="zerowpc-font-item font-id-711"></li>
 </ul>';
 	}
+
 }
+
+ZeroWPCFontCreator::instance();

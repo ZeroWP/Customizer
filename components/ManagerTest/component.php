@@ -7,6 +7,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ----------------------------*/
 add_action( 'zwpc:create', function( $ctz ){
 
+	// STOP!!!
+	return;
+
 	$ctz->openCustomizer();
 
 	$ctz->addSection( 'test_fields', 'Test fields' );
